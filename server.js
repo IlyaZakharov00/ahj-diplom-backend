@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
   res.send("Serever working");
 });
 
-app.get("/available", (req, res) => {
+app.get("/serverAvailable", (req, res) => {
   res.send({
     headers: { "Content-Type": "application/json" },
     succes: true,
@@ -39,11 +39,7 @@ const filesData = path.join(__dirname, "/storage/files.json");
 const audioData = path.join(__dirname, "/storage/audio.json");
 const videoData = path.join(__dirname, "/storage/video.json");
 
-// const dataFromClient = fs.existsSync(storageFile)
-//   ? JSON.parse(fs.readFileSync(storageFile))
-//   : defaultData;
-
-app.get("/allMessages", (req, res) => {
+app.get("/getAllMessages", (req, res) => {
   let body = JSON.stringify(allMsg);
   res.send({
     headers: { "Content-Type": "application/json" },
@@ -53,7 +49,7 @@ app.get("/allMessages", (req, res) => {
   });
 });
 
-app.post("/", (req, res) => {
+app.post("/sendMessage", (req, res) => {
   const msg = req.body;
   allMsg.push(msg);
   console.log(msg);
@@ -108,7 +104,7 @@ app.post("/", (req, res) => {
   }
 });
 
-app.delete("/", (req, res) => {
+app.delete("/clear", (req, res) => {
   const msg = req.body;
   if (msg.id) {
     for (const item of allMsg) {
