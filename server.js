@@ -10,9 +10,9 @@ const app = express();
 const port = 3030;
 
 app.use(bodyParser.json());
-// app.use(express.static("storage/uploads"));
+app.use(express.static("storage/uploads"));
 app.use(express.static("storage/img"));
-// app.use(express.static("storage/mediaMessages"));
+app.use(express.static("storage/mediaMessages"));
 app.use(cors());
 app.use(fileUploader());
 
@@ -385,6 +385,7 @@ app.delete("/clearAll", (req, res) => {
         console.log("Чтение медиа-сообщений прошло успешно! " + files);
       }
       for (let i = 0; i < files.length; i++) {
+        if (files[i] == "index.html") return;
         fs.unlink(`${__dirname}/storage/mediaMessages/${files[i]}`, (e) =>
           console.log("Удаление всех медиа-сообщений прошло успешно! " + e)
         );
