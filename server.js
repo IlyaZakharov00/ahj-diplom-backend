@@ -10,9 +10,9 @@ const app = express();
 const port = 3030;
 
 app.use(bodyParser.json());
-app.use(express.static("storage/uploads"));
+// app.use(express.static("storage/uploads"));
 app.use(express.static("storage/img"));
-app.use(express.static("storage/mediaMessages"));
+// app.use(express.static("storage/mediaMessages"));
 app.use(cors());
 app.use(fileUploader());
 
