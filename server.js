@@ -54,36 +54,6 @@ app.get("/getAllMessages", (req, res) => {
   });
 });
 
-// app.get("/getAllMediaMessages", (req, res) => {
-//   let id = req.query.id;
-//   let thisFile;
-//   let thisFileName;
-//   let thisFormat;
-
-//   for (const item of allFiles) {
-//     if (!item.data) return;
-//     if (item.data.id === id) {
-//       thisFile = item.file;
-//       thisFileName = item.data.name;
-//       thisFormat = item.data.format;
-//     }
-//   }
-//   try {
-//     let path_ = `${__dirname}/storage/uploads/${thisFileName}`;
-
-//     console.log("Успешно получили все медиа-сообщения!");
-//     res.sendFile(path_);
-//   } catch (error) {
-//     console.log("При получении медиа-сообщений произошла ошибка!");
-//     res.send({
-//       headers: { "Content-Type": "application/json" },
-//       succes: false,
-//       message: "Failed to receive messages! " + error,
-//     });
-//   }
-//   return;
-// });
-
 app.post("/sendMessage", (req, res) => {
   const msg = req.body;
 
@@ -369,7 +339,7 @@ app.delete("/clearAll", (req, res) => {
       }
 
       for (let i = 0; i < files.length; i++) {
-        if (files[i] == "index.html") return;
+        if (files[i] == "index.html") continue;
         fs.unlink(`${__dirname}/storage/uploads/${files[i]}`, (e) =>
           console.log("Удаление всех файлов прошло успешно! " + e)
         );
@@ -385,7 +355,7 @@ app.delete("/clearAll", (req, res) => {
         console.log("Чтение медиа-сообщений прошло успешно! " + files);
       }
       for (let i = 0; i < files.length; i++) {
-        if (files[i] == "index.html") return;
+        if (files[i] == "index.html") continue;
         fs.unlink(`${__dirname}/storage/mediaMessages/${files[i]}`, (e) =>
           console.log("Удаление всех медиа-сообщений прошло успешно! " + e)
         );
